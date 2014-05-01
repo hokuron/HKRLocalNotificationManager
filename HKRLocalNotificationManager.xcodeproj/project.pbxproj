@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA52E75019122C2100C0FDFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E74F19122C2100C0FDFA /* Foundation.framework */; };
+		AA52E75219122C2100C0FDFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E75119122C2100C0FDFA /* CoreGraphics.framework */; };
+		AA52E75419122C2100C0FDFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E75319122C2100C0FDFA /* UIKit.framework */; };
+		AA52E75A19122C2100C0FDFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA52E75819122C2100C0FDFA /* InfoPlist.strings */; };
+		AA52E75C19122C2100C0FDFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E75B19122C2100C0FDFA /* main.m */; };
+		AA52E76019122C2100C0FDFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E75F19122C2100C0FDFA /* AppDelegate.m */; };
+		AA52E76319122C2100C0FDFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA52E76119122C2100C0FDFA /* Main.storyboard */; };
+		AA52E76619122C2100C0FDFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E76519122C2100C0FDFA /* ViewController.m */; };
+		AA52E76819122C2100C0FDFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA52E76719122C2100C0FDFA /* Images.xcassets */; };
+		AA52E76F19122C2100C0FDFA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E76E19122C2100C0FDFA /* XCTest.framework */; };
+		AA52E77019122C2100C0FDFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E74F19122C2100C0FDFA /* Foundation.framework */; };
+		AA52E77119122C2100C0FDFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E75319122C2100C0FDFA /* UIKit.framework */; };
+		AA52E77919122C2100C0FDFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA52E77719122C2100C0FDFA /* InfoPlist.strings */; };
+		AA52E77B19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E77A19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m */; };
+		AA52E78B1912304100C0FDFA /* HKRLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */; };
+		AA52E78C1912374300C0FDFA /* HKRLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA52E77219122C2100C0FDFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA52E74419122C2100C0FDFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA52E74B19122C2100C0FDFA;
+			remoteInfo = HKRLocalNotificationManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AA52E74C19122C2100C0FDFA /* HKRLocalNotificationManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HKRLocalNotificationManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA52E74F19122C2100C0FDFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AA52E75119122C2100C0FDFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AA52E75319122C2100C0FDFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AA52E75719122C2100C0FDFA /* HKRLocalNotificationManager-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HKRLocalNotificationManager-Info.plist"; sourceTree = "<group>"; };
+		AA52E75919122C2100C0FDFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA52E75B19122C2100C0FDFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA52E75D19122C2100C0FDFA /* HKRLocalNotificationManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HKRLocalNotificationManager-Prefix.pch"; sourceTree = "<group>"; };
+		AA52E75E19122C2100C0FDFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Example/AppDelegate.h; sourceTree = "<group>"; };
+		AA52E75F19122C2100C0FDFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../Example/AppDelegate.m; sourceTree = "<group>"; };
+		AA52E76219122C2100C0FDFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AA52E76419122C2100C0FDFA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../Example/ViewController.h; sourceTree = "<group>"; };
+		AA52E76519122C2100C0FDFA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../Example/ViewController.m; sourceTree = "<group>"; };
+		AA52E76719122C2100C0FDFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Example/Images.xcassets; sourceTree = "<group>"; };
+		AA52E76D19122C2100C0FDFA /* HKRLocalNotificationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HKRLocalNotificationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA52E76E19122C2100C0FDFA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AA52E77619122C2100C0FDFA /* HKRLocalNotificationManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HKRLocalNotificationManagerTests-Info.plist"; sourceTree = "<group>"; };
+		AA52E77819122C2100C0FDFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA52E77A19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HKRLocalNotificationManagerTests.m; sourceTree = "<group>"; };
+		AA52E7891912304100C0FDFA /* HKRLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKRLocalNotificationManager.h; sourceTree = "<group>"; };
+		AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRLocalNotificationManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA52E74919122C2100C0FDFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA52E75219122C2100C0FDFA /* CoreGraphics.framework in Frameworks */,
+				AA52E75419122C2100C0FDFA /* UIKit.framework in Frameworks */,
+				AA52E75019122C2100C0FDFA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA52E76A19122C2100C0FDFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA52E76F19122C2100C0FDFA /* XCTest.framework in Frameworks */,
+				AA52E77119122C2100C0FDFA /* UIKit.framework in Frameworks */,
+				AA52E77019122C2100C0FDFA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA52E74319122C2100C0FDFA = {
+			isa = PBXGroup;
+			children = (
+				AA52E7881912304100C0FDFA /* HRKLocalNotificationManager */,
+				AA52E77419122C2100C0FDFA /* Tests */,
+				AA52E75519122C2100C0FDFA /* Example */,
+				AA52E74E19122C2100C0FDFA /* Frameworks */,
+				AA52E74D19122C2100C0FDFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA52E74D19122C2100C0FDFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA52E74C19122C2100C0FDFA /* HKRLocalNotificationManager.app */,
+				AA52E76D19122C2100C0FDFA /* HKRLocalNotificationManagerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA52E74E19122C2100C0FDFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA52E74F19122C2100C0FDFA /* Foundation.framework */,
+				AA52E75119122C2100C0FDFA /* CoreGraphics.framework */,
+				AA52E75319122C2100C0FDFA /* UIKit.framework */,
+				AA52E76E19122C2100C0FDFA /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA52E75519122C2100C0FDFA /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				AA52E75E19122C2100C0FDFA /* AppDelegate.h */,
+				AA52E75F19122C2100C0FDFA /* AppDelegate.m */,
+				AA52E76119122C2100C0FDFA /* Main.storyboard */,
+				AA52E76419122C2100C0FDFA /* ViewController.h */,
+				AA52E76519122C2100C0FDFA /* ViewController.m */,
+				AA52E76719122C2100C0FDFA /* Images.xcassets */,
+				AA52E75619122C2100C0FDFA /* Supporting Files */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		AA52E75619122C2100C0FDFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA52E75719122C2100C0FDFA /* HKRLocalNotificationManager-Info.plist */,
+				AA52E75819122C2100C0FDFA /* InfoPlist.strings */,
+				AA52E75B19122C2100C0FDFA /* main.m */,
+				AA52E75D19122C2100C0FDFA /* HKRLocalNotificationManager-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA52E77419122C2100C0FDFA /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				AA52E77A19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m */,
+				AA52E77519122C2100C0FDFA /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		AA52E77519122C2100C0FDFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA52E77619122C2100C0FDFA /* HKRLocalNotificationManagerTests-Info.plist */,
+				AA52E77719122C2100C0FDFA /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA52E7881912304100C0FDFA /* HRKLocalNotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				AA52E7891912304100C0FDFA /* HKRLocalNotificationManager.h */,
+				AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */,
+			);
+			path = HRKLocalNotificationManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA52E74B19122C2100C0FDFA /* HKRLocalNotificationManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA52E77E19122C2100C0FDFA /* Build configuration list for PBXNativeTarget "HKRLocalNotificationManager" */;
+			buildPhases = (
+				AA52E74819122C2100C0FDFA /* Sources */,
+				AA52E74919122C2100C0FDFA /* Frameworks */,
+				AA52E74A19122C2100C0FDFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HKRLocalNotificationManager;
+			productName = HKRLocalNotificationManager;
+			productReference = AA52E74C19122C2100C0FDFA /* HKRLocalNotificationManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA52E76C19122C2100C0FDFA /* HKRLocalNotificationManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA52E78119122C2100C0FDFA /* Build configuration list for PBXNativeTarget "HKRLocalNotificationManagerTests" */;
+			buildPhases = (
+				AA52E76919122C2100C0FDFA /* Sources */,
+				AA52E76A19122C2100C0FDFA /* Frameworks */,
+				AA52E76B19122C2100C0FDFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA52E77319122C2100C0FDFA /* PBXTargetDependency */,
+			);
+			name = HKRLocalNotificationManagerTests;
+			productName = HKRLocalNotificationManagerTests;
+			productReference = AA52E76D19122C2100C0FDFA /* HKRLocalNotificationManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA52E74419122C2100C0FDFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Takuma Shimizu";
+				TargetAttributes = {
+					AA52E76C19122C2100C0FDFA = {
+						TestTargetID = AA52E74B19122C2100C0FDFA;
+					};
+				};
+			};
+			buildConfigurationList = AA52E74719122C2100C0FDFA /* Build configuration list for PBXProject "HKRLocalNotificationManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA52E74319122C2100C0FDFA;
+			productRefGroup = AA52E74D19122C2100C0FDFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA52E74B19122C2100C0FDFA /* HKRLocalNotificationManager */,
+				AA52E76C19122C2100C0FDFA /* HKRLocalNotificationManagerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA52E74A19122C2100C0FDFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA52E76819122C2100C0FDFA /* Images.xcassets in Resources */,
+				AA52E75A19122C2100C0FDFA /* InfoPlist.strings in Resources */,
+				AA52E76319122C2100C0FDFA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA52E76B19122C2100C0FDFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA52E77919122C2100C0FDFA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA52E74819122C2100C0FDFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA52E76619122C2100C0FDFA /* ViewController.m in Sources */,
+				AA52E76019122C2100C0FDFA /* AppDelegate.m in Sources */,
+				AA52E78B1912304100C0FDFA /* HKRLocalNotificationManager.m in Sources */,
+				AA52E75C19122C2100C0FDFA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA52E76919122C2100C0FDFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA52E78C1912374300C0FDFA /* HKRLocalNotificationManager.m in Sources */,
+				AA52E77B19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA52E77319122C2100C0FDFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA52E74B19122C2100C0FDFA /* HKRLocalNotificationManager */;
+			targetProxy = AA52E77219122C2100C0FDFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AA52E75819122C2100C0FDFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA52E75919122C2100C0FDFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AA52E76119122C2100C0FDFA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA52E76219122C2100C0FDFA /* Base */,
+			);
+			name = Main.storyboard;
+			path = ../Example;
+			sourceTree = "<group>";
+		};
+		AA52E77719122C2100C0FDFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA52E77819122C2100C0FDFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AA52E77C19122C2100C0FDFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AA52E77D19122C2100C0FDFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA52E77F19122C2100C0FDFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Example/HKRLocalNotificationManager-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/HKRLocalNotificationManagerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AA52E78019122C2100C0FDFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Example/HKRLocalNotificationManager-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/HKRLocalNotificationManagerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AA52E78219122C2100C0FDFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HKRLocalNotificationManager.app/HKRLocalNotificationManager";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Example/HKRLocalNotificationManager-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Tests/HKRLocalNotificationManagerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AA52E78319122C2100C0FDFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HKRLocalNotificationManager.app/HKRLocalNotificationManager";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Example/HKRLocalNotificationManager-Prefix.pch";
+				INFOPLIST_FILE = "Tests/HKRLocalNotificationManagerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA52E74719122C2100C0FDFA /* Build configuration list for PBXProject "HKRLocalNotificationManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA52E77C19122C2100C0FDFA /* Debug */,
+				AA52E77D19122C2100C0FDFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA52E77E19122C2100C0FDFA /* Build configuration list for PBXNativeTarget "HKRLocalNotificationManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA52E77F19122C2100C0FDFA /* Debug */,
+				AA52E78019122C2100C0FDFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AA52E78119122C2100C0FDFA /* Build configuration list for PBXNativeTarget "HKRLocalNotificationManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA52E78219122C2100C0FDFA /* Debug */,
+				AA52E78319122C2100C0FDFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA52E74419122C2100C0FDFA /* Project object */;
+}
