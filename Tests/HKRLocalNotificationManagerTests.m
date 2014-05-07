@@ -93,7 +93,8 @@
     }
 }
 
-#pragma mark -
+#pragma mark
+#pragma mark - Instantiation
 
 - (void)testSharedInstance
 {
@@ -148,18 +149,18 @@
     XCTAssertNotEqualObjects(self.alertBody, alertBody, @"cannot overwrite argument properties by options");
 }
 
-- (void)testScheduleNotificationOnBodyUserInfoOptions_fixedSoundName
+- (void)testScheduleNotificationOnBodyUserInfoOptions_defaultSoundName
 {
-    _manager.fixedSoundName = @"fixedSoundName";
+    _manager.defaultSoundName = @"defaultSoundName";
     UILocalNotification *result = [_manager scheduleNotificationOn:self.fireDate body:self.alertBody userInfo:self.userInfo options:nil];
-    XCTAssertEqualObjects(result.soundName, _manager.fixedSoundName, @"if soundName is NOT specified, it should match %@", _manager.fixedSoundName);
+    XCTAssertEqualObjects(result.soundName, _manager.defaultSoundName, @"if soundName is NOT specified, it should match %@", _manager.defaultSoundName);
 }
 
-- (void)testScheduleNotificationOnBodyUserInfoOptions_overwriteFixedSoundName
+- (void)testScheduleNotificationOnBodyUserInfoOptions_overwriteDefaultSoundName
 {
     NSString *soundName = @"orverwritten_sound_name";
     UILocalNotification *result = [_manager scheduleNotificationOn:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
-    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
+    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
 #pragma mark - testScheduleNotificationWithActionOnDateBodyUserInfoOptions
@@ -207,18 +208,18 @@
     XCTAssertNotEqualObjects(self.alertBody, alertBody, @"cannot overwrite argument properties by options");
 }
 
-- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_fixedSoundName
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_defaultSoundName
 {
-    _manager.fixedSoundName = @"fixedSoundName";
+    _manager.defaultSoundName = @"defaultSoundName";
     UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:nil];
-    XCTAssertEqualObjects(result.soundName, _manager.fixedSoundName, @"if soundName is NOT specified, it should match %@", _manager.fixedSoundName);
+    XCTAssertEqualObjects(result.soundName, _manager.defaultSoundName, @"if soundName is NOT specified, it should match %@", _manager.defaultSoundName);
 }
 
-- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_overwriteFixedSoundName
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_overwriteDefaultSoundName
 {
     NSString *soundName = @"orverwritten_sound_name";
     UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
-    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
+    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
 - (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_hasAction
@@ -240,18 +241,18 @@
     XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"there is no scheduledLocalNotifications for the notification was fired right now");
 }
 
-- (void)testPresentNotificationNowWithBodyUserInfoOptions_fixedSoundName
+- (void)testPresentNotificationNowWithBodyUserInfoOptions_defaultSoundName
 {
-    _manager.fixedSoundName = @"fixedSoundName";
+    _manager.defaultSoundName = @"defaultSoundName";
     UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:nil];
-    XCTAssertEqualObjects(result.soundName, _manager.fixedSoundName, @"if soundName is NOT specified, it should match %@", _manager.fixedSoundName);
+    XCTAssertEqualObjects(result.soundName, _manager.defaultSoundName, @"if soundName is NOT specified, it should match %@", _manager.defaultSoundName);
 }
 
-- (void)testPresentNotificationNowWithBodyUserInfoOptions_overwriteFixedSoundName
+- (void)testPresentNotificationNowWithBodyUserInfoOptions_overwriteDefaultSoundName
 {
     NSString *soundName = @"orverwritten_sound_name";
     UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
-    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
+    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
 #pragma mark - presentNotificationNowWithActionBodyUserInfoOptions
@@ -267,18 +268,18 @@
     XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"there is no scheduledLocalNotifications for the notification was fired right now");
 }
 
-- (void)testPresentNotificationNowWithActionBodyUserInfoOptions_fixedSoundName
+- (void)testPresentNotificationNowWithActionBodyUserInfoOptions_defaultSoundName
 {
-    _manager.fixedSoundName = @"fixedSoundName";
+    _manager.defaultSoundName = @"defaultSoundName";
     UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
-    XCTAssertEqualObjects(result.soundName, _manager.fixedSoundName, @"if soundName is NOT specified, it should match %@", _manager.fixedSoundName);
+    XCTAssertEqualObjects(result.soundName, _manager.defaultSoundName, @"if soundName is NOT specified, it should match %@", _manager.defaultSoundName);
 }
 
-- (void)testPresentNotificationNowWithActionBodyUserInfoOptions_overwriteFixedSoundName
+- (void)testPresentNotificationNowWithActionBodyUserInfoOptions_overwriteDefaultSoundName
 {
     NSString *soundName = @"orverwritten_sound_name";
     UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
-    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
+    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
 - (void)testPresentNotificationNowWithActionBodyUserInfoOptions_hasAction

@@ -19,7 +19,7 @@
 
 + (UILocalNotification *)presentNotificationNowWithAction:(NSString *)alertAction body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties;
 
-@property (nonatomic, copy) NSString *fixedSoundName;
+@property (nonatomic, copy) NSString *defaultSoundName;
 
 @end
 

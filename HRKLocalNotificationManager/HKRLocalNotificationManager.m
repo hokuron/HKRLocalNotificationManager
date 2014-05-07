@@ -32,7 +32,7 @@
 - (instancetype)initSharedInstance
 {
     if (! (self = [super init])) return nil;
-    _fixedSoundName = UILocalNotificationDefaultSoundName;
+    _defaultSoundName = UILocalNotificationDefaultSoundName;
     _app = [UIApplication sharedApplication];
     return self;
 }
@@ -87,7 +87,7 @@
     NSDictionary *properties = @{
                                  @"alertBody": alertBody,
                                  @"userInfo" : userInfo,
-                                 @"hasAction"  : @YES
+                                 @"hasAction": @YES
                                  };
     UILocalNotification *notif = [self mergeAndCreateLocalNotificationWithProperties:properties options:otherProperties];
     [[UIApplication sharedApplication] presentLocalNotificationNow:notif];
@@ -107,7 +107,7 @@
     NSMutableDictionary *mergedProperties = otherProperties ? [otherProperties mutableCopy] : [@{} mutableCopy];
     [mergedProperties addEntriesFromDictionary:properties];
     if (! [[mergedProperties allKeys] containsObject:@"soundName"]) {
-        [mergedProperties setValue:[HKRLocalNotificationManager sharedManager].fixedSoundName forKey:@"soundName"];
+        [mergedProperties setValue:[HKRLocalNotificationManager sharedManager].defaultSoundName forKey:@"soundName"];
     }
     return [mergedProperties copy];
 }
