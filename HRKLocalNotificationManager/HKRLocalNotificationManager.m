@@ -106,10 +106,15 @@
 {
     NSMutableDictionary *mergedProperties = otherProperties ? [otherProperties mutableCopy] : [@{} mutableCopy];
     [mergedProperties addEntriesFromDictionary:properties];
-    if (! [[mergedProperties allKeys] containsObject:@"soundName"]) {
-        [mergedProperties setValue:self.defaultSoundName forKey:@"soundName"];
-    }
+    [self determineSoundNameOptionsWithOpions:mergedProperties];
     return [mergedProperties copy];
+}
+
+- (void)determineSoundNameOptionsWithOpions:(NSMutableDictionary *)options
+{
+    if (! [[options allKeys] containsObject:@"soundName"]) {
+        options[@"soundName"] = self.defaultSoundName;
+    }
 }
 
 @end
@@ -124,7 +129,12 @@
     UILocalNotification *notif = [UILocalNotification new];
     [properties enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if (class_getProperty([notif class], [key UTF8String]) != NULL) {
-            [notif setValue:obj forKey:key];
+            if (obj == [NSNull null]) {
+                [notif setValue:nil forKey:key];
+            }
+            else {
+                [notif setValue:obj forKey:key];
+            }
         }
     }];
     return notif;

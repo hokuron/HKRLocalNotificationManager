@@ -309,4 +309,20 @@
     }
 }
 
+- (void)testUILocalNotificationCategory_hkr_localNotificationWithOptions_NSNull
+{
+    [_props setObject:[NSNull null] forKey:@"soundName"];
+    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:_props];
+    self.soundName = nil;
+    NSArray *propNames = [self propertyNames];
+    for (NSString *name in propNames) {
+        if ([name isEqualToString:@"soundName"]) {
+            XCTAssertNil([notif valueForKey:name], @"NSNull should be converted nil");
+        }
+        else {
+            XCTAssertEqualObjects([notif valueForKey:name], [self valueForKey:name], @"%@ should match %@", name, [self valueForKey:name]);
+        }
+    }
+}
+
 @end
