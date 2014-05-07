@@ -52,8 +52,7 @@
                                  @"alertBody": alertBody,
                                  @"userInfo" : userInfo
                                  };
-    NSDictionary *options = [self.class mergeNotificationProperty:properties options:otherProperties];
-    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:options];
+    UILocalNotification *notif = [self.class mergeAndCreateLocalNotificationWithProperties:properties options:otherProperties];
     [self.app scheduleLocalNotification:notif];
     return notif;
 }
@@ -65,15 +64,31 @@
                                  @"fireDate"   : fireDate,
                                  @"alertBody"  : alertBody,
                                  @"userInfo"   : userInfo,
-                                 @"hasAction"  : @YES,
+                                 @"hasAction"  : @YES
                                  };
-    NSDictionary *options = [self.class mergeNotificationProperty:properties options:otherProperties];
-    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:options];
+    UILocalNotification *notif = [self.class mergeAndCreateLocalNotificationWithProperties:properties options:otherProperties];
     [self.app scheduleLocalNotification:notif];
     return notif;
 }
 
++ (UILocalNotification *)presentNotificationNowWithBody:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
+{
+    NSDictionary *properties = @{
+                                 @"alertBody": alertBody,
+                                 @"userInfo" : userInfo
+                                 };
+    UILocalNotification *notif = [self mergeAndCreateLocalNotificationWithProperties:properties options:otherProperties];
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notif];
+    return notif;
+}
+
 #pragma mark - Privates
+
++ (UILocalNotification *)mergeAndCreateLocalNotificationWithProperties:(NSDictionary *)properties options:(NSDictionary *)otherProperties
+{
+    NSDictionary *options = [self mergeNotificationProperty:properties options:otherProperties];
+    return [UILocalNotification hkr_localNotificationWithOptions:options];
+}
 
 + (NSDictionary *)mergeNotificationProperty:(NSDictionary *)properties options:(NSDictionary *)otherProperties
 {
