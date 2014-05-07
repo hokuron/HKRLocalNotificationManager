@@ -98,16 +98,16 @@
 
 + (UILocalNotification *)mergeAndCreateLocalNotificationWithProperties:(NSDictionary *)properties options:(NSDictionary *)otherProperties
 {
-    NSDictionary *options = [self mergeNotificationProperty:properties options:otherProperties];
+    NSDictionary *options = [[HKRLocalNotificationManager sharedManager] mergeNotificationProperty:properties options:otherProperties];
     return [UILocalNotification hkr_localNotificationWithOptions:options];
 }
 
-+ (NSDictionary *)mergeNotificationProperty:(NSDictionary *)properties options:(NSDictionary *)otherProperties
+- (NSDictionary *)mergeNotificationProperty:(NSDictionary *)properties options:(NSDictionary *)otherProperties
 {
     NSMutableDictionary *mergedProperties = otherProperties ? [otherProperties mutableCopy] : [@{} mutableCopy];
     [mergedProperties addEntriesFromDictionary:properties];
     if (! [[mergedProperties allKeys] containsObject:@"soundName"]) {
-        [mergedProperties setValue:[HKRLocalNotificationManager sharedManager].defaultSoundName forKey:@"soundName"];
+        [mergedProperties setValue:self.defaultSoundName forKey:@"soundName"];
     }
     return [mergedProperties copy];
 }
