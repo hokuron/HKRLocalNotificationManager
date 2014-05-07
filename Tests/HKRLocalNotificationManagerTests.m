@@ -57,6 +57,7 @@
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [_props removeAllObjects];
+    _manager = nil;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [super tearDown];
 }
@@ -88,9 +89,11 @@
     NSArray *propNames = [self propertyNames];
     for (NSString *name in propNames) {
         if ([name isEqualToString:@"soundName"]) continue;
-        XCTAssertEqualObjects([target valueForKey:name], [notif valueForKey:name], @"%@ should match %@", name, [self valueForKey:name]);
+        XCTAssertEqualObjects([target valueForKey:name], [notif valueForKey:name], @"%@ should match '%@'", name, [self valueForKey:name]);
     }
 }
+
+#pragma mark -
 
 - (void)testSharedInstance
 {
@@ -102,6 +105,8 @@
     XCTAssertThrows([[HKRLocalNotificationManager alloc] init], @"init method should not recognize");
     XCTAssertThrows([HKRLocalNotificationManager new], @"new method should not recognize");
 }
+
+#pragma mark - testScheduleNotificationOnBodyUserInfoOptions
 
 - (void)testScheduleNotificationOnBodyUserInfoOptions_noOptions
 {
@@ -156,6 +161,73 @@
     UILocalNotification *result = [_manager scheduleNotificationOn:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
     XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
 }
+
+#pragma mark - testScheduleNotificationWithActionOnDateBodyUserInfoOptions
+
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_noOptions
+{
+    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:nil];
+    UILocalNotification *notif  = [UILocalNotification new];
+    notif.alertAction = self.alertAction;
+    notif.fireDate  = self.fireDate;
+    notif.alertBody = self.alertBody;
+    notif.userInfo  = self.userInfo;
+    
+    [self localNotificationPropertiesMatchingTestWithTarget:result testData:notif];
+    [self localNotificationPropertiesMatchingTestWithTarget:result testData:[[UIApplication sharedApplication].scheduledLocalNotifications firstObject]];
+}
+
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_addOptions
+{
+    NSString *alertLaunchImage = @"additional_option";
+    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"alertLaunchImage": alertLaunchImage}];
+    UILocalNotification *notif  = [UILocalNotification new];
+    notif.alertAction = self.alertAction;
+    notif.fireDate  = self.fireDate;
+    notif.alertBody = self.alertBody;
+    notif.userInfo  = self.userInfo;
+    notif.alertLaunchImage = alertLaunchImage;
+    
+    [self localNotificationPropertiesMatchingTestWithTarget:result testData:notif];
+    [self localNotificationPropertiesMatchingTestWithTarget:result testData:[[UIApplication sharedApplication].scheduledLocalNotifications firstObject]];
+}
+
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_overwriteArgProps
+{
+    NSString *alertBody = @"orverwritten_alert_body";
+    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"alertBody": alertBody}];
+    UILocalNotification *notif  = [UILocalNotification new];
+    notif.alertAction = self.alertAction;
+    notif.fireDate  = self.fireDate;
+    notif.alertBody = self.alertBody;
+    notif.userInfo  = self.userInfo;
+    
+    [self localNotificationPropertiesMatchingTestWithTarget:result testData:notif];
+    [self localNotificationPropertiesMatchingTestWithTarget:result testData:[[UIApplication sharedApplication].scheduledLocalNotifications firstObject]];
+    XCTAssertNotEqualObjects(self.alertBody, alertBody, @"cannot overwrite argument properties by options");
+}
+
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_fixedSoundName
+{
+    _manager.fixedSoundName = @"fixedSoundName";
+    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertEqualObjects(result.soundName, _manager.fixedSoundName, @"if soundName is NOT specified, it should match %@", _manager.fixedSoundName);
+}
+
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_overwriteFixedSoundName
+{
+    NSString *soundName = @"orverwritten_sound_name";
+    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
+    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
+}
+
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_hasAction
+{
+    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"hasAction": @NO}];
+    XCTAssertEqual(result.hasAction, YES, @"hasAction is YES at any time");
+}
+
+#pragma mark - UILocalNotification (HKRLocalNotificationManager)
 
 - (void)testUILocalNotificationCategory_hkr_localNotificationWithOptions_validArg
 {

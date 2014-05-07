@@ -47,7 +47,27 @@
 
 - (UILocalNotification *)scheduleNotificationOn:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
 {
-    NSDictionary *options = [self.class mergeNotificationProperty:otherProperties fireDate:fireDate alertBody:alertBody userInfo:userInfo];
+    NSDictionary *properties = @{
+                                 @"fireDate" : fireDate,
+                                 @"alertBody": alertBody,
+                                 @"userInfo" : userInfo
+                                 };
+    NSDictionary *options = [self.class mergeNotificationProperty:properties options:otherProperties];
+    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:options];
+    [self.app scheduleLocalNotification:notif];
+    return notif;
+}
+
+- (UILocalNotification *)scheduleNotificationWithAction:(NSString *)alertAction onDate:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
+{
+    NSDictionary *properties = @{
+                                 @"alertAction": alertAction,
+                                 @"fireDate"   : fireDate,
+                                 @"alertBody"  : alertBody,
+                                 @"userInfo"   : userInfo,
+                                 @"hasAction"  : @YES,
+                                 };
+    NSDictionary *options = [self.class mergeNotificationProperty:properties options:otherProperties];
     UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:options];
     [self.app scheduleLocalNotification:notif];
     return notif;
@@ -55,16 +75,14 @@
 
 #pragma mark - Privates
 
-+ (NSDictionary *)mergeNotificationProperty:(NSDictionary *)properties fireDate:(NSDate *)fireDate alertBody:(NSString *)alertBody userInfo:(NSDictionary *)userInfo
++ (NSDictionary *)mergeNotificationProperty:(NSDictionary *)properties options:(NSDictionary *)otherProperties
 {
-    NSMutableDictionary *options = properties ? [properties mutableCopy] : [@{} mutableCopy];
-    if (! [[options allKeys] containsObject:@"soundName"]) {
-        [options setObject:[HKRLocalNotificationManager sharedManager].fixedSoundName forKey:@"soundName"];
+    NSMutableDictionary *mergedProperties = otherProperties ? [otherProperties mutableCopy] : [@{} mutableCopy];
+    [mergedProperties addEntriesFromDictionary:properties];
+    if (! [[mergedProperties allKeys] containsObject:@"soundName"]) {
+        [mergedProperties setValue:[HKRLocalNotificationManager sharedManager].fixedSoundName forKey:@"soundName"];
     }
-    [options setObject:fireDate forKey:@"fireDate"];
-    [options setObject:alertBody forKey:@"alertBody"];
-    [options setObject:userInfo forKey:@"userInfo"];
-    return [options copy];
+    return [mergedProperties copy];
 }
 
 @end
