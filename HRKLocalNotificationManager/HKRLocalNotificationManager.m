@@ -82,6 +82,18 @@
     return notif;
 }
 
++ (UILocalNotification *)presentNotificationNowWithAction:(NSString *)alertAction body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
+{
+    NSDictionary *properties = @{
+                                 @"alertBody": alertBody,
+                                 @"userInfo" : userInfo,
+                                 @"hasAction"  : @YES
+                                 };
+    UILocalNotification *notif = [self mergeAndCreateLocalNotificationWithProperties:properties options:otherProperties];
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notif];
+    return notif;
+}
+
 #pragma mark - Privates
 
 + (UILocalNotification *)mergeAndCreateLocalNotificationWithProperties:(NSDictionary *)properties options:(NSDictionary *)otherProperties

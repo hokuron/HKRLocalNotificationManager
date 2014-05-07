@@ -254,6 +254,39 @@
     XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
 }
 
+#pragma mark - presentNotificationNowWithActionBodyUserInfoOptions
+
+- (void)testPresentNotificationNowWithActionBodyUserInfoOptions
+{
+    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
+    UILocalNotification *notif  = [UILocalNotification new];
+    notif.alertBody = self.alertBody;
+    notif.userInfo  = self.userInfo;
+    
+    [self localNotificationPropertiesMatchingTestWithTarget:result testData:notif];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"there is no scheduledLocalNotifications for the notification was fired right now");
+}
+
+- (void)testPresentNotificationNowWithActionBodyUserInfoOptions_fixedSoundName
+{
+    _manager.fixedSoundName = @"fixedSoundName";
+    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertEqualObjects(result.soundName, _manager.fixedSoundName, @"if soundName is NOT specified, it should match %@", _manager.fixedSoundName);
+}
+
+- (void)testPresentNotificationNowWithActionBodyUserInfoOptions_overwriteFixedSoundName
+{
+    NSString *soundName = @"orverwritten_sound_name";
+    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
+    XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, fixedSoundName is ignored (specific soundName: %@)", soundName);
+}
+
+- (void)testPresentNotificationNowWithActionBodyUserInfoOptions_hasAction
+{
+    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"hasAction": @NO}];
+    XCTAssertEqual(result.hasAction, YES, @"hasAction is YES at any time");
+}
+
 #pragma mark - UILocalNotification (HKRLocalNotificationManager)
 
 - (void)testUILocalNotificationCategory_hkr_localNotificationWithOptions_validArg
