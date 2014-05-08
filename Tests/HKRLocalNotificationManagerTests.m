@@ -163,6 +163,20 @@
     XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
+- (void)testScheduleNotificationOnBodyUserInfoOptions_fireDateNil
+{
+    UILocalNotification *result = [_manager scheduleNotificationOn:nil body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertNil(result, @"if fireDate is nil, notification should NOT be scheduled");
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is nil, notification should NOT be scheduled");
+}
+
+- (void)testScheduleNotificationOnBodyUserInfoOptions_fireDatePast
+{
+    UILocalNotification *result = [_manager scheduleNotificationOn:[NSDate date] body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertNil(result, @"if fireDate is past, notification should NOT be scheduled");
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is past, notification should NOT be scheduled");
+}
+
 #pragma mark - testScheduleNotificationWithActionOnDateBodyUserInfoOptions
 
 - (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_noOptions
@@ -222,10 +236,11 @@
     XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
-- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_hasAction
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_fireDatePast
 {
-    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"hasAction": @NO}];
-    XCTAssertEqual(result.hasAction, YES, @"hasAction is YES at any time");
+    UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:[NSDate date] body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertNil(result, @"if fireDate is past, notification should NOT be scheduled");
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is past, notification should NOT be scheduled");
 }
 
 #pragma mark - presentNotificationNowWithBodyUserInfoOptions

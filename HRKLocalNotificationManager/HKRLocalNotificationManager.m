@@ -11,6 +11,8 @@
 
 @interface HKRLocalNotificationManager ()
 
+@property (nonatomic) NSMutableArray *stackedLocalNotifications;
+
 @property (nonatomic, strong) UIApplication *app;
 
 @end
@@ -47,6 +49,10 @@
 
 - (UILocalNotification *)scheduleNotificationOn:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
 {
+    if (! [self allowsToScheduleNotificationOn:fireDate]) {
+        return nil;
+    }
+    
     NSDictionary *properties = @{
                                  @"fireDate" : fireDate,
                                  @"alertBody": alertBody,
@@ -59,6 +65,10 @@
 
 - (UILocalNotification *)scheduleNotificationWithAction:(NSString *)alertAction onDate:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
 {
+    if (! [self allowsToScheduleNotificationOn:fireDate]) {
+        return nil;
+    }
+
     NSDictionary *properties = @{
                                  @"alertAction": alertAction,
                                  @"fireDate"   : fireDate,
@@ -115,6 +125,11 @@
     if (! [[options allKeys] containsObject:@"soundName"]) {
         options[@"soundName"] = self.defaultSoundName;
     }
+}
+
+- (BOOL)allowsToScheduleNotificationOn:(NSDate *)fireDate
+{
+    return [fireDate timeIntervalSinceNow] > 0;
 }
 
 @end
