@@ -163,17 +163,10 @@
     XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
-- (void)testScheduleNotificationOnBodyUserInfoOptions_fireDateNil
-{
-    UILocalNotification *result = [_manager scheduleNotificationOn:nil body:self.alertBody userInfo:self.userInfo options:nil];
-    XCTAssertNil(result, @"if fireDate is nil, notification should NOT be scheduled");
-    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is nil, notification should NOT be scheduled");
-}
-
 - (void)testScheduleNotificationOnBodyUserInfoOptions_fireDatePast
 {
     UILocalNotification *result = [_manager scheduleNotificationOn:[NSDate date] body:self.alertBody userInfo:self.userInfo options:nil];
-    XCTAssertNil(result, @"if fireDate is past, notification should NOT be scheduled");
+    XCTAssertNotNil(result, @"");
     XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is past, notification should NOT be scheduled");
 }
 
@@ -239,7 +232,7 @@
 - (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_fireDatePast
 {
     UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:[NSDate date] body:self.alertBody userInfo:self.userInfo options:nil];
-    XCTAssertNil(result, @"if fireDate is past, notification should NOT be scheduled");
+    XCTAssertNotNil(result, @"");
     XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is past, notification should NOT be scheduled");
 }
 
@@ -304,6 +297,19 @@
 }
 
 #pragma mark - UILocalNotification (HKRLocalNotificationManager)
+
+- (void)testScheduleLocalNotification_sameLocalNotificationObject
+{
+    UILocalNotification *notif = [UILocalNotification new];
+    notif.fireDate = [[NSDate date] dateByAddingTimeInterval:24 * 60 * 60];
+    notif.alertBody = @"notification";
+    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+    for (int i=0; i < 10; i += 1) {
+        [[UIApplication sharedApplication] scheduleLocalNotification:[[UIApplication sharedApplication].scheduledLocalNotifications firstObject]];
+    }
+
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)1, @"");
+}
 
 - (void)testUILocalNotificationCategory_hkr_localNotificationWithOptions_validArg
 {
