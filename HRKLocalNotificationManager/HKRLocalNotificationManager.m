@@ -116,11 +116,11 @@
 {
     NSMutableDictionary *mergedProperties = otherProperties ? [otherProperties mutableCopy] : [@{} mutableCopy];
     [mergedProperties addEntriesFromDictionary:properties];
-    [self determineSoundNameOptionsWithOpions:mergedProperties];
+    [self determineSoundNameForProperties:mergedProperties];
     return [mergedProperties copy];
 }
 
-- (void)determineSoundNameOptionsWithOpions:(NSMutableDictionary *)options
+- (void)determineSoundNameForProperties:(NSMutableDictionary *)options
 {
     if (! [[options allKeys] containsObject:@"soundName"]) {
         options[@"soundName"] = self.defaultSoundName;
