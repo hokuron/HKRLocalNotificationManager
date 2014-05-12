@@ -269,6 +269,7 @@
 {
     UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
     UILocalNotification *notif  = [UILocalNotification new];
+    notif.alertAction = self.alertAction;
     notif.alertBody = self.alertBody;
     notif.userInfo  = self.userInfo;
     

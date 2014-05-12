@@ -23,6 +23,8 @@
 		AA52E77B19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E77A19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m */; };
 		AA52E78B1912304100C0FDFA /* HKRLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */; };
 		AA52E78C1912374300C0FDFA /* HKRLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */; };
+		AA6B637B19208313007538CC /* HKRLocalNotificationPropertyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B637A19208313007538CC /* HKRLocalNotificationPropertyBuilder.m */; };
+		AA6B637D19208484007538CC /* HKRLocalNotificationPropertyBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B637C19208483007538CC /* HKRLocalNotificationPropertyBuilderTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,9 @@
 		AA52E77A19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HKRLocalNotificationManagerTests.m; sourceTree = "<group>"; };
 		AA52E7891912304100C0FDFA /* HKRLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKRLocalNotificationManager.h; sourceTree = "<group>"; };
 		AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRLocalNotificationManager.m; sourceTree = "<group>"; };
+		AA6B637919208313007538CC /* HKRLocalNotificationPropertyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKRLocalNotificationPropertyBuilder.h; sourceTree = "<group>"; };
+		AA6B637A19208313007538CC /* HKRLocalNotificationPropertyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRLocalNotificationPropertyBuilder.m; sourceTree = "<group>"; };
+		AA6B637C19208483007538CC /* HKRLocalNotificationPropertyBuilderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKRLocalNotificationPropertyBuilderTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				AA52E77A19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m */,
+				AA6B637C19208483007538CC /* HKRLocalNotificationPropertyBuilderTest.m */,
 				AA52E77519122C2100C0FDFA /* Supporting Files */,
 			);
 			path = Tests;
@@ -162,6 +168,8 @@
 			children = (
 				AA52E7891912304100C0FDFA /* HKRLocalNotificationManager.h */,
 				AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */,
+				AA6B637919208313007538CC /* HKRLocalNotificationPropertyBuilder.h */,
+				AA6B637A19208313007538CC /* HKRLocalNotificationPropertyBuilder.m */,
 			);
 			path = HRKLocalNotificationManager;
 			sourceTree = "<group>";
@@ -267,6 +275,7 @@
 				AA52E76019122C2100C0FDFA /* AppDelegate.m in Sources */,
 				AA52E78B1912304100C0FDFA /* HKRLocalNotificationManager.m in Sources */,
 				AA52E75C19122C2100C0FDFA /* main.m in Sources */,
+				AA6B637B19208313007538CC /* HKRLocalNotificationPropertyBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA52E78C1912374300C0FDFA /* HKRLocalNotificationManager.m in Sources */,
+				AA6B637D19208484007538CC /* HKRLocalNotificationPropertyBuilderTest.m in Sources */,
 				AA52E77B19122C2100C0FDFA /* HKRLocalNotificationManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,6 +485,7 @@
 				AA52E78019122C2100C0FDFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA52E78119122C2100C0FDFA /* Build configuration list for PBXNativeTarget "HKRLocalNotificationManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +494,7 @@
 				AA52E78319122C2100C0FDFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
