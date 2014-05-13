@@ -13,4 +13,6 @@
 - (NSDictionary *)basicPropertiesWithDate:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo;
 - (NSDictionary *)basicPropertiesWithAction:(NSString *)alertAction date:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo;
 
+- (NSDictionary *)mergeProperty:(NSDictionary *)properties withOther:(NSDictionary *)otherProperties;
+
 @end

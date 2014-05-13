@@ -82,22 +82,6 @@
 
 #pragma mark - Privates
 
-+ (UILocalNotification *)mergeAndScheduleLocalNotificationWithProperties:(NSDictionary *)properties options:(NSDictionary *)otherProperties
-{
-    NSDictionary *options = [[HKRLocalNotificationManager sharedManager] mergeNotificationProperty:properties options:otherProperties];
-    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:options];
-    [[HKRLocalNotificationManager sharedManager] scheduleLocalNotifications:notif];
-    return notif;
-}
-
-- (NSDictionary *)mergeNotificationProperty:(NSDictionary *)properties options:(NSDictionary *)otherProperties
-{
-    NSMutableDictionary *mergedProperties = otherProperties ? [otherProperties mutableCopy] : [@{} mutableCopy];
-    [mergedProperties addEntriesFromDictionary:properties];
-    [self determineSoundNameForProperties:mergedProperties];
-    return [mergedProperties copy];
-}
-
 - (void)scheduleLocalNotifications:(id)notifications
 {
     if (! [notifications isKindOfClass:[NSArray class]]) {
@@ -115,11 +99,22 @@
     }
 }
 
-- (void)determineSoundNameForProperties:(NSMutableDictionary *)options
+- (UILocalNotification *)mergeAndScheduleLocalNotificationWithProperties:(NSDictionary *)properties options:(NSDictionary *)otherProperties
 {
+    NSDictionary *options = [self.builder mergeProperty:properties withOther:otherProperties];
+    options = [self determineSoundNameForProperties:[options mutableCopy]];
+    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:options];
+    [self scheduleLocalNotifications:notif];
+    return notif;
+}
+
+- (NSDictionary *)determineSoundNameForProperties:(NSDictionary *)options
+{
+    NSMutableDictionary *prop = [options mutableCopy];
     if (! [[options allKeys] containsObject:@"soundName"]) {
-        options[@"soundName"] = self.defaultSoundName;
+        prop[@"soundName"] = self.defaultSoundName;
     }
+    return [prop copy];
 }
 
 - (BOOL)allowsToScheduleNotificationOn:(NSDate *)fireDate

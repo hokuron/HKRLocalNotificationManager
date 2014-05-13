@@ -34,6 +34,11 @@ NSString *const kHKRPropertyBuilderUserInfo    = @"userInfo";
              };
 }
 
-
+- (NSDictionary *)mergeProperty:(NSDictionary *)properties withOther:(NSDictionary *)otherProperties
+{
+    NSMutableDictionary *mergedProperties = otherProperties ? [otherProperties mutableCopy] : [@{} mutableCopy];
+    [mergedProperties addEntriesFromDictionary:properties];
+    return [mergedProperties copy];
+}
 
 @end

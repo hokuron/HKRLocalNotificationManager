@@ -72,4 +72,22 @@
     XCTAssertEqualObjects(result[@"userInfo"], [NSNull null], @"when arguments designate nil, it should match NSNull");
 }
 
+- (void)testMergePropertyWithOther
+{
+    NSDictionary *prop  = @{@"alertBody": _alertBody, @"userInfo": _userInfo};
+    NSDictionary *other = @{@"alertBody": @"DUPLICATE Alert Body", @"alertAction": _alertAction};
+    NSDictionary *result = [_builder mergeProperty:prop withOther:other];
+    XCTAssertTrue([_userInfo isEqualToDictionary:result[@"userInfo"]], @"structure of userInfo key should match %@", _userInfo);
+    XCTAssertEqualObjects(result[@"alertAction"], _alertAction, @"value of alertAction key should match %@", _alertAction);
+    XCTAssertEqualObjects(result[@"alertBody"], _alertBody, @"when key of argument dictionaries is duplicate, 1st argument is priority %@", _alertBody);
+}
+
+- (void)testMergePropertyWithOther_otherPropertyNil
+{
+    NSDictionary *prop  = @{@"alertBody": _alertBody, @"userInfo": _userInfo};
+    NSDictionary *result = [_builder mergeProperty:prop withOther:nil];
+    XCTAssertEqualObjects(result[@"alertBody"], _alertBody, @"when key of argument dictionaries is duplicate, 1st argument is priority %@", _alertBody);
+    XCTAssertTrue([_userInfo isEqualToDictionary:result[@"userInfo"]], @"structure of userInfo key should match %@", _userInfo);
+}
+
 @end
