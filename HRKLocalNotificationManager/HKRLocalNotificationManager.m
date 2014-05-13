@@ -15,7 +15,9 @@
 @property (nonatomic) NSMutableArray *stackedLocalNotifications;
 @property (nonatomic) NSDate *startRescheduleDate;
 
-@property (nonatomic, strong) UIApplication *app;
+@property (nonatomic) HKRLocalNotificationPropertyBuilder *builder;
+
+@property (nonatomic) UIApplication *app;
 
 @end
 
@@ -37,6 +39,7 @@
 {
     if (! (self = [super init])) return nil;
     _defaultSoundName = UILocalNotificationDefaultSoundName;
+    _builder = [HKRLocalNotificationPropertyBuilder new];
     _app = [UIApplication sharedApplication];
     return self;
 }
@@ -51,28 +54,28 @@
 
 - (UILocalNotification *)scheduleNotificationOn:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
 {
-    NSDictionary *properties = [HKRLocalNotificationPropertyBuilder basicPropertiesWithDate:fireDate body:alertBody userInfo:userInfo];
-    UILocalNotification *notif = [self.class mergeAndScheduleLocalNotificationWithProperties:properties options:otherProperties];
+    NSDictionary *properties = [self.builder basicPropertiesWithDate:fireDate body:alertBody userInfo:userInfo];
+    UILocalNotification *notif = [self mergeAndScheduleLocalNotificationWithProperties:properties options:otherProperties];
     return notif;
 }
 
 - (UILocalNotification *)scheduleNotificationWithAction:(NSString *)alertAction onDate:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
 {
-    NSDictionary *properties = [HKRLocalNotificationPropertyBuilder basicPropertiesWithAction:alertAction date:fireDate body:alertBody userInfo:userInfo];
-    UILocalNotification *notif = [self.class mergeAndScheduleLocalNotificationWithProperties:properties options:otherProperties];
-    return notif;
-}
-
-+ (UILocalNotification *)presentNotificationNowWithBody:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
-{
-    NSDictionary *properties = [HKRLocalNotificationPropertyBuilder basicPropertiesWithDate:nil body:alertBody userInfo:userInfo];
+    NSDictionary *properties = [self.builder basicPropertiesWithAction:alertAction date:fireDate body:alertBody userInfo:userInfo];
     UILocalNotification *notif = [self mergeAndScheduleLocalNotificationWithProperties:properties options:otherProperties];
     return notif;
 }
 
-+ (UILocalNotification *)presentNotificationNowWithAction:(NSString *)alertAction body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
+- (UILocalNotification *)presentNotificationNowWithBody:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
 {
-    NSDictionary *properties = [HKRLocalNotificationPropertyBuilder basicPropertiesWithAction:alertAction date:nil body:alertBody userInfo:userInfo];
+    NSDictionary *properties = [self.builder basicPropertiesWithDate:nil body:alertBody userInfo:userInfo];
+    UILocalNotification *notif = [self mergeAndScheduleLocalNotificationWithProperties:properties options:otherProperties];
+    return notif;
+}
+
+- (UILocalNotification *)presentNotificationNowWithAction:(NSString *)alertAction body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties
+{
+    NSDictionary *properties = [self.builder basicPropertiesWithAction:alertAction date:nil body:alertBody userInfo:userInfo];
     UILocalNotification *notif = [self mergeAndScheduleLocalNotificationWithProperties:properties options:otherProperties];
     return notif;
 }

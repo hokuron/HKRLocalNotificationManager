@@ -15,6 +15,8 @@
 @end
 
 @implementation HKRLocalNotificationPropertyBuilderTest {
+    HKRLocalNotificationPropertyBuilder *_builder;
+    
     NSString     *_alertAction;
     NSString     *_alertBody;
     NSDate       *_fireDate;
@@ -25,6 +27,7 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    _builder = [HKRLocalNotificationPropertyBuilder new];
     _alertAction = @"Alert Action";
     _alertBody   = @"Alert Body";
     _fireDate    = [NSDate date];
@@ -39,7 +42,7 @@
 
 - (void)testBasicPropertiesWithDateBodyUserInfo
 {
-    NSDictionary *result = [HKRLocalNotificationPropertyBuilder basicPropertiesWithDate:_fireDate body:_alertBody userInfo:_userInfo];
+    NSDictionary *result = [_builder basicPropertiesWithDate:_fireDate body:_alertBody userInfo:_userInfo];
     XCTAssertEqualObjects(result[@"alertBody"], _alertBody, @"value of alertBody key should match %@", _alertBody);
     XCTAssertEqualObjects(result[@"fireDate"], _fireDate, @"value of fireDate key should match %@", _fireDate);
     XCTAssertTrue([_userInfo isEqualToDictionary:result[@"userInfo"]], @"structure of userInfo key should match %@", _userInfo);
@@ -47,14 +50,14 @@
 
 - (void)testBasicPropertiesWithDateBodyUserInfo_nil
 {
-    NSDictionary *result = [HKRLocalNotificationPropertyBuilder basicPropertiesWithDate:nil body:_alertBody userInfo:nil];
+    NSDictionary *result = [_builder basicPropertiesWithDate:nil body:_alertBody userInfo:nil];
     XCTAssertEqualObjects(result[@"fireDate"], [NSNull null], @"when arguments designate nil, it should match NSNull");
     XCTAssertEqualObjects(result[@"userInfo"], [NSNull null], @"when arguments designate nil, it should match NSNull");
 }
 
 - (void)testBasicPropertiesWithActionDateBodyUserInfo
 {
-    NSDictionary *result = [HKRLocalNotificationPropertyBuilder basicPropertiesWithAction:_alertAction date:_fireDate body:_alertBody userInfo:_userInfo];
+    NSDictionary *result = [_builder basicPropertiesWithAction:_alertAction date:_fireDate body:_alertBody userInfo:_userInfo];
     XCTAssertEqualObjects(result[@"alertAction"], _alertAction, @"value of alertAction key should match %@", _alertAction);
     XCTAssertEqualObjects(result[@"alertBody"], _alertBody, @"value of alertBody key should match %@", _alertBody);
     XCTAssertEqualObjects(result[@"fireDate"], _fireDate, @"value of fireDate key should match %@", _fireDate);
@@ -64,7 +67,7 @@
 
 - (void)testBasicPropertiesWithActionDateBodyUserInfo_nil
 {
-    NSDictionary *result = [HKRLocalNotificationPropertyBuilder basicPropertiesWithAction:_alertAction date:nil body:_alertBody userInfo:nil];
+    NSDictionary *result = [_builder basicPropertiesWithAction:_alertAction date:nil body:_alertBody userInfo:nil];
     XCTAssertEqualObjects(result[@"fireDate"], [NSNull null], @"when arguments designate nil, it should match NSNull");
     XCTAssertEqualObjects(result[@"userInfo"], [NSNull null], @"when arguments designate nil, it should match NSNull");
 }

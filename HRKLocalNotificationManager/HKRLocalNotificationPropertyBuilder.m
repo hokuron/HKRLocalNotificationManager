@@ -16,7 +16,7 @@ NSString *const kHKRPropertyBuilderUserInfo    = @"userInfo";
 
 @implementation HKRLocalNotificationPropertyBuilder
 
-+ (NSDictionary *)basicPropertiesWithDate:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo
+- (NSDictionary *)basicPropertiesWithDate:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo
 {
     return @{kHKRPropertyBuilderFireDate:  fireDate ? fireDate : [NSNull null],
              kHKRPropertyBuilderAlertBody: alertBody,
@@ -24,7 +24,7 @@ NSString *const kHKRPropertyBuilderUserInfo    = @"userInfo";
              };
 }
 
-+ (NSDictionary *)basicPropertiesWithAction:(NSString *)alertAction date:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo
+- (NSDictionary *)basicPropertiesWithAction:(NSString *)alertAction date:(NSDate *)fireDate body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo
 {
     return @{kHKRPropertyBuilderFireDate:    fireDate ? fireDate : [NSNull null],
              kHKRPropertyBuilderAlertBody:   alertBody,

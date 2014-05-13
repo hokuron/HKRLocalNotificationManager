@@ -177,9 +177,9 @@
     UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:nil];
     UILocalNotification *notif  = [UILocalNotification new];
     notif.alertAction = self.alertAction;
-    notif.fireDate  = self.fireDate;
-    notif.alertBody = self.alertBody;
-    notif.userInfo  = self.userInfo;
+    notif.fireDate    = self.fireDate;
+    notif.alertBody   = self.alertBody;
+    notif.userInfo    = self.userInfo;
     
     [self localNotificationPropertiesMatchingTestWithTarget:result testData:notif];
     [self localNotificationPropertiesMatchingTestWithTarget:result testData:[[UIApplication sharedApplication].scheduledLocalNotifications firstObject]];
@@ -191,9 +191,9 @@
     UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"alertLaunchImage": alertLaunchImage}];
     UILocalNotification *notif  = [UILocalNotification new];
     notif.alertAction = self.alertAction;
-    notif.fireDate  = self.fireDate;
-    notif.alertBody = self.alertBody;
-    notif.userInfo  = self.userInfo;
+    notif.fireDate    = self.fireDate;
+    notif.alertBody   = self.alertBody;
+    notif.userInfo    = self.userInfo;
     notif.alertLaunchImage = alertLaunchImage;
     
     [self localNotificationPropertiesMatchingTestWithTarget:result testData:notif];
@@ -206,9 +206,9 @@
     UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:@{@"alertBody": alertBody}];
     UILocalNotification *notif  = [UILocalNotification new];
     notif.alertAction = self.alertAction;
-    notif.fireDate  = self.fireDate;
-    notif.alertBody = self.alertBody;
-    notif.userInfo  = self.userInfo;
+    notif.fireDate    = self.fireDate;
+    notif.alertBody   = self.alertBody;
+    notif.userInfo    = self.userInfo;
     
     [self localNotificationPropertiesMatchingTestWithTarget:result testData:notif];
     [self localNotificationPropertiesMatchingTestWithTarget:result testData:[[UIApplication sharedApplication].scheduledLocalNotifications firstObject]];
@@ -240,7 +240,7 @@
 
 - (void)testPresentNotificationNowWithBodyUserInfoOptions
 {
-    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:nil];
+    UILocalNotification *result = [_manager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:nil];
     UILocalNotification *notif  = [UILocalNotification new];
     notif.alertBody = self.alertBody;
     notif.userInfo  = self.userInfo;
@@ -252,14 +252,14 @@
 - (void)testPresentNotificationNowWithBodyUserInfoOptions_defaultSoundName
 {
     _manager.defaultSoundName = @"defaultSoundName";
-    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:nil];
+    UILocalNotification *result = [_manager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:nil];
     XCTAssertEqualObjects(result.soundName, _manager.defaultSoundName, @"if soundName is NOT specified, it should match %@", _manager.defaultSoundName);
 }
 
 - (void)testPresentNotificationNowWithBodyUserInfoOptions_overwriteDefaultSoundName
 {
     NSString *soundName = @"orverwritten_sound_name";
-    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
+    UILocalNotification *result = [_manager presentNotificationNowWithBody:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
     XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
@@ -267,7 +267,7 @@
 
 - (void)testPresentNotificationNowWithActionBodyUserInfoOptions
 {
-    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
+    UILocalNotification *result = [_manager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
     UILocalNotification *notif  = [UILocalNotification new];
     notif.alertAction = self.alertAction;
     notif.alertBody = self.alertBody;
@@ -280,20 +280,20 @@
 - (void)testPresentNotificationNowWithActionBodyUserInfoOptions_defaultSoundName
 {
     _manager.defaultSoundName = @"defaultSoundName";
-    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
+    UILocalNotification *result = [_manager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:nil];
     XCTAssertEqualObjects(result.soundName, _manager.defaultSoundName, @"if soundName is NOT specified, it should match %@", _manager.defaultSoundName);
 }
 
 - (void)testPresentNotificationNowWithActionBodyUserInfoOptions_overwriteDefaultSoundName
 {
     NSString *soundName = @"orverwritten_sound_name";
-    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
+    UILocalNotification *result = [_manager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"soundName": soundName}];
     XCTAssertEqualObjects(result.soundName, soundName, @"if soundName is specified, defaultSoundName is ignored (specific soundName: %@)", soundName);
 }
 
 - (void)testPresentNotificationNowWithActionBodyUserInfoOptions_hasAction
 {
-    UILocalNotification *result = [HKRLocalNotificationManager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"hasAction": @NO}];
+    UILocalNotification *result = [_manager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"hasAction": @NO}];
     XCTAssertEqual(result.hasAction, YES, @"hasAction is YES at any time");
 }
 
