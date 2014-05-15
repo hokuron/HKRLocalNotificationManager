@@ -92,10 +92,9 @@
         if (! notif.fireDate) {
             [self.app presentLocalNotificationNow:notif];
         }
-        else if (! [self allowsToScheduleNotificationOn:notif.fireDate]) {
-            continue;
+        else if ([self allowsToScheduleNotificationOn:notif.fireDate]) {
+            [self.app scheduleLocalNotification:notif];
         }
-        [self.app scheduleLocalNotification:notif];
     }
 }
 
