@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <objc/message.h>
 #import <objc/runtime.h>
 
 #import "HKRLocalNotificationManager.h"
@@ -295,6 +296,55 @@
 {
     UILocalNotification *result = [_manager presentNotificationNowWithAction:self.alertAction body:self.alertBody userInfo:self.userInfo options:@{@"hasAction": @NO}];
     XCTAssertEqual(result.hasAction, YES, @"hasAction is YES at any time");
+}
+
+#pragma mark - rescheduleAllLocalNotificationsIfNeeded
+
+- (void)testRescheduleAllLocalNotificationsIfNeeded_scheduledLocalNotifications
+{
+    for (int i=0; i < 2; i += 1) {
+        [_props setObject:[@"notif" stringByAppendingFormat:@" %d", i] forKey:@"alertBody"];
+        UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:_props];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+    }
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)2, @"");
+    
+    [_manager setNeedsRescheduling];
+    [_manager rescheduleAllLocalNotificationsIfNeeded];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)2, @"after rescheduling and number before that should match");
+}
+
+- (void)testRescheduleAllLocalNotificationsIfNeeded_stackedLocalNotificaions
+{
+    UILocalNotification *firstNotif;
+    SEL selector = @selector(scheduleLocalNotification:);
+    for (int i=0; i < 3; i += 1) {
+        [_props setObject:[@"notif" stringByAppendingFormat:@" %d", i] forKey:@"alertBody"];
+        UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:_props];
+        objc_msgSend(_manager, selector, notif);
+        if (i == 0) {
+            firstNotif = notif;
+        }
+    }
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)1, @"");
+    XCTAssertEqualObjects([[UIApplication sharedApplication].scheduledLocalNotifications firstObject], firstNotif, @"");
+    XCTAssertEqual([_manager.stackedLocalNotifications count], (NSUInteger)2, @"subsequent notifications of second should be stacked");
+    
+    [_manager setNeedsRescheduling];
+    [_manager rescheduleAllLocalNotificationsIfNeeded];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)3, @"total of notification schedules on OS and stacks should be rescheduled into OS");
+}
+
+- (void)testRescheduleAllLocalNotificationsIfNeeded_notNeed
+{
+    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:_props];
+    NSMutableOrderedSet *stackedNotificationsSetSpy = [_manager valueForKey:@"stackedNotificationsSet"];
+    [stackedNotificationsSetSpy addObject:notif];
+    
+    [_manager rescheduleAllLocalNotificationsIfNeeded];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"not be rescheduled if it is not needed");
+    XCTAssertEqual([_manager.stackedLocalNotifications count], (NSUInteger)1, @"");
+    [stackedNotificationsSetSpy removeAllObjects];
 }
 
 #pragma mark - UILocalNotification (HKRLocalNotificationManager)

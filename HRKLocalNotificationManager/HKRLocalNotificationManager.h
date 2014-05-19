@@ -18,6 +18,10 @@
 
 @property (nonatomic, copy) NSString *defaultSoundName;
 
+- (void)setNeedsRescheduling;
+- (void)rescheduleAllLocalNotificationsIfNeeded;
+@property (nonatomic, readonly) NSArray *stackedLocalNotifications;
+
 @end
 
 

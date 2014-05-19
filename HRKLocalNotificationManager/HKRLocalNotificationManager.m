@@ -12,16 +12,30 @@
 
 @interface HKRLocalNotificationManager ()
 
-@property (nonatomic) NSMutableArray *stackedLocalNotifications;
+@property (nonatomic) BOOL needsRescheduling;
+@property (nonatomic) NSMutableOrderedSet *stackedNotificationsSet;
 @property (nonatomic) NSDate *startRescheduleDate;
 
 @property (nonatomic) HKRLocalNotificationPropertyBuilder *builder;
-
 @property (nonatomic) UIApplication *app;
 
 @end
 
 @implementation HKRLocalNotificationManager
+
+#pragma mark - Getter
+
+- (NSArray *)stackedLocalNotifications
+{
+    return [self.stackedNotificationsSet array];
+}
+
+- (NSMutableOrderedSet *)stackedNotificationsSet
+{
+    if (_stackedNotificationsSet) return _stackedNotificationsSet;
+    _stackedNotificationsSet = [NSMutableOrderedSet orderedSet];
+    return _stackedNotificationsSet;
+}
 
 #pragma mark - Instantiation
 
@@ -30,7 +44,7 @@
     static HKRLocalNotificationManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[HKRLocalNotificationManager alloc] initSharedInstance];
+        manager = [[self alloc] initSharedInstance];
     });
     return manager;
 }
@@ -80,20 +94,51 @@
     return notif;
 }
 
+- (void)setNeedsRescheduling
+{
+    self.needsRescheduling = YES;
+}
+
+- (void)rescheduleAllLocalNotificationsIfNeeded
+{
+    if (! self.needsRescheduling) return;
+    
+    self.startRescheduleDate = [NSDate date];
+    
+    [self.stackedNotificationsSet addObjectsFromArray:self.app.scheduledLocalNotifications];
+    [self.app cancelAllLocalNotifications];
+    [self rescheduleAllLocalNotifications];
+    [self.stackedNotificationsSet removeAllObjects];
+
+    self.needsRescheduling = NO;
+    
+    self.startRescheduleDate = nil;
+}
+
 #pragma mark - Privates
 
-- (void)scheduleLocalNotifications:(id)notifications
+- (void)scheduleLocalNotification:(UILocalNotification *)notification
 {
-    if (! [notifications isKindOfClass:[NSArray class]]) {
-        notifications = @[notifications];
+    if (! notification.fireDate) {
+        [self.app presentLocalNotificationNow:notification];
     }
-    
-    for (UILocalNotification *notif in notifications) {
-        if (! notif.fireDate) {
-            [self.app presentLocalNotificationNow:notif];
+    else if ([self shouldStackNotification]) {
+        self.needsRescheduling = YES;
+        [self.stackedNotificationsSet addObject:notification];
+    }
+    else if ([self allowsToScheduleNotificationOn:notification.fireDate]) {
+        [self.app scheduleLocalNotification:notification];
+    }
+}
+
+- (void)rescheduleAllLocalNotifications
+{
+    for (UILocalNotification *notification in self.stackedNotificationsSet) {
+        if (! notification.fireDate) {
+            [self.app presentLocalNotificationNow:notification];
         }
-        else if ([self allowsToScheduleNotificationOn:notif.fireDate]) {
-            [self.app scheduleLocalNotification:notif];
+        else if ([self allowsToScheduleNotificationOn:notification.fireDate]) {
+            [self.app scheduleLocalNotification:notification];
         }
     }
 }
@@ -103,7 +148,7 @@
     NSDictionary *options = [self.builder mergeProperty:properties withOther:otherProperties];
     options = [self determineSoundNameForProperties:[options mutableCopy]];
     UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:options];
-    [self scheduleLocalNotifications:notif];
+    [self scheduleLocalNotification:notif];
     return notif;
 }
 
@@ -114,6 +159,11 @@
         prop[@"soundName"] = self.defaultSoundName;
     }
     return [prop copy];
+}
+
+- (BOOL)shouldStackNotification
+{
+    return [self.app.scheduledLocalNotifications count];
 }
 
 - (BOOL)allowsToScheduleNotificationOn:(NSDate *)fireDate
@@ -131,15 +181,11 @@
 
 + (instancetype)hkr_localNotificationWithOptions:(NSDictionary *)properties
 {
-    UILocalNotification *notif = [UILocalNotification new];
+    UILocalNotification *notif = [self new];
     [properties enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if (class_getProperty([notif class], [key UTF8String]) != NULL) {
-            if (obj == [NSNull null]) {
-                [notif setValue:nil forKey:key];
-            }
-            else {
-                [notif setValue:obj forKey:key];
-            }
+            obj = obj == [NSNull null] ? nil : obj;
+            [notif setValue:obj forKey:key];
         }
     }];
     return notif;
