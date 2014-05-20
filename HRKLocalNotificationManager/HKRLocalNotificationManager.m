@@ -37,6 +37,20 @@
     return _stackedNotificationsSet;
 }
 
+- (HKRLocalNotificationPropertyBuilder *)builder
+{
+    if (_builder) return _builder;
+    _builder = [HKRLocalNotificationPropertyBuilder new];
+    return _builder;
+}
+
+- (UIApplication *)app
+{
+    if (_app) return _app;
+    _app = [UIApplication sharedApplication];
+    return _app;
+}
+
 #pragma mark - Instantiation
 
 + (instancetype)sharedManager
@@ -53,8 +67,7 @@
 {
     if (! (self = [super init])) return nil;
     _defaultSoundName = UILocalNotificationDefaultSoundName;
-    _builder = [HKRLocalNotificationPropertyBuilder new];
-    _app = [UIApplication sharedApplication];
+    _needsRescheduling = NO;
     return self;
 }
 
