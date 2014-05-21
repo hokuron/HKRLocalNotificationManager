@@ -348,6 +348,20 @@
     [stackedNotificationsSetSpy removeAllObjects];
 }
 
+- (void)testRescheduleAllLocalNotificationsIfNeeded_variationOfNeedsRescheduling
+{
+    SEL selector = @selector(scheduleLocalNotification:);
+    for (int i=0; i < 2; i += 1) {
+        [_props setObject:[@"notif" stringByAppendingFormat:@" %d", i] forKey:@"alertBody"];
+        UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:_props];
+        objc_msgSend(_manager, selector, notif);
+    }
+    XCTAssertTrue([[_manager valueForKey:@"needsRescheduling"] boolValue], @"before rescheduling, needsRescheduling is YES");
+    
+    [_manager rescheduleAllLocalNotificationsIfNeeded];
+    XCTAssertFalse([[_manager valueForKey:@"needsRescheduling"] boolValue], @"after rescheduling, needsRescheduling should NO");
+}
+
 #pragma mark - cancelNotification
 
 - (void)testCancelNotification_inScheduled
