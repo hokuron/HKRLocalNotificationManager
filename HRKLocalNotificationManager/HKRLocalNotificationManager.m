@@ -136,6 +136,19 @@
     [self.proxyStackedNotificationsSet removeAllObjects];
 }
 
++ (void)rescheduleInBackground
+{
+    HKRLocalNotificationManager *manager = [self sharedManager];
+    __block UIBackgroundTaskIdentifier bgTask = [manager.app beginBackgroundTaskWithExpirationHandler:^{
+        [manager.app endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+
+    [manager rescheduleAllLocalNotificationsIfNeeded];
+    [manager.app endBackgroundTask:bgTask];
+    bgTask = UIBackgroundTaskInvalid;
+}
+
 - (void)setNeedsRescheduling
 {
     self.needsRescheduling = YES;
