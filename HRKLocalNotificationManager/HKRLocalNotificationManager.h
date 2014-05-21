@@ -16,6 +16,9 @@
 - (UILocalNotification *)presentNotificationNowWithBody:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties;
 - (UILocalNotification *)presentNotificationNowWithAction:(NSString *)alertAction body:(NSString *)alertBody userInfo:(NSDictionary *)userInfo options:(NSDictionary *)otherProperties;
 
+- (void)cancelNotification:(UILocalNotification *)notification;
+- (void)cancelAllNotifications;
+
 @property (nonatomic, copy) NSString *defaultSoundName;
 
 - (void)setNeedsRescheduling;

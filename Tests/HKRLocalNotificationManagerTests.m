@@ -341,10 +341,53 @@
     NSMutableOrderedSet *stackedNotificationsSetSpy = [_manager valueForKey:@"stackedNotificationsSet"];
     [stackedNotificationsSetSpy addObject:notif];
     
+    [_manager setValue:@NO forKey:@"needsRescheduling"];
     [_manager rescheduleAllLocalNotificationsIfNeeded];
     XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"not be rescheduled if it is not needed");
     XCTAssertEqual([_manager.stackedLocalNotifications count], (NSUInteger)1, @"");
     [stackedNotificationsSetSpy removeAllObjects];
+}
+
+#pragma mark - cancelNotification
+
+- (void)testCancelNotification_inScheduled
+{
+    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:_props];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)1, @"");
+    
+    [_manager cancelNotification:notif];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"notification should be canceled from OS");
+    XCTAssertFalse([[_manager valueForKey:@"needsRescheduling"] boolValue], @"need to reschedule is eliminated");
+}
+
+- (void)testCancelNotification_inStacked
+{
+    UILocalNotification *notif = [UILocalNotification hkr_localNotificationWithOptions:_props];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+    UILocalNotification *stackedNotif = [_manager scheduleNotificationOn:self.fireDate body:@"stack" userInfo:nil options:nil];
+    XCTAssertEqual([_manager.stackedLocalNotifications count], (NSUInteger)1, @"");
+    XCTAssertTrue([[_manager valueForKey:@"needsRescheduling"] boolValue], @"");
+
+    [_manager cancelNotification:stackedNotif];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)1, @"scheduled notification is no affects");
+    XCTAssertEqual([_manager.stackedLocalNotifications count], (NSUInteger)0, @"notification should be canceled from stacked by manager");
+    XCTAssertFalse([[_manager valueForKey:@"needsRescheduling"] boolValue], @"need to reschedule is eliminated");
+}
+
+#pragma mark - cancelAllNotifications
+
+- (void)testCancelAllNotifications
+{
+    [_manager scheduleNotificationOn:self.fireDate body:@"under OS" userInfo:nil options:nil];
+    [_manager scheduleNotificationOn:self.fireDate body:@"stack" userInfo:nil options:nil];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)1, @"");
+    XCTAssertEqual([_manager.stackedLocalNotifications count], (NSUInteger)1, @"");
+    
+    [_manager cancelAllNotifications];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"all notification should be canceled from OS");
+    XCTAssertEqual([_manager.stackedLocalNotifications count], (NSUInteger)0, @"all notification should be canceled from stacked by manager");
+    XCTAssertFalse([[_manager valueForKey:@"needsRescheduling"] boolValue], @"need to reschedule is eliminated");
 }
 
 #pragma mark - UILocalNotification (HKRLocalNotificationManager)

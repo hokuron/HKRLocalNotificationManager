@@ -14,6 +14,7 @@
 
 @property (nonatomic) BOOL needsRescheduling;
 @property (nonatomic) NSMutableOrderedSet *stackedNotificationsSet;
+@property (nonatomic) NSMutableOrderedSet *proxyStackedNotificationsSet;
 @property (nonatomic) NSDate *startRescheduleDate;
 
 @property (nonatomic) HKRLocalNotificationPropertyBuilder *builder;
@@ -68,6 +69,8 @@
     if (! (self = [super init])) return nil;
     _defaultSoundName = UILocalNotificationDefaultSoundName;
     _needsRescheduling = NO;
+    [self addObserver:self forKeyPath:@"stackedNotificationsSet" options:NSKeyValueObservingOptionNew context:NULL];
+    _proxyStackedNotificationsSet = [self mutableOrderedSetValueForKey:@"stackedNotificationsSet"];
     return self;
 }
 
@@ -75,6 +78,16 @@
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self  forKeyPath:@"stackedNotificationsSet"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    self.needsRescheduling = [self.stackedNotificationsSet count];
 }
 
 #pragma mark - Publics
@@ -107,6 +120,22 @@
     return notif;
 }
 
+- (void)cancelNotification:(UILocalNotification *)notification
+{
+    if ([self.app.scheduledLocalNotifications containsObject:notification]) {
+        [self.app cancelLocalNotification:notification];
+    }
+    if ([self.proxyStackedNotificationsSet containsObject:notification]) {
+        [self.proxyStackedNotificationsSet removeObject:notification];
+    }
+}
+
+- (void)cancelAllNotifications
+{
+    [self.app cancelAllLocalNotifications];
+    [self.proxyStackedNotificationsSet removeAllObjects];
+}
+
 - (void)setNeedsRescheduling
 {
     self.needsRescheduling = YES;
@@ -118,12 +147,10 @@
     
     self.startRescheduleDate = [NSDate date];
     
-    [self.stackedNotificationsSet addObjectsFromArray:self.app.scheduledLocalNotifications];
+    [self.proxyStackedNotificationsSet addObjectsFromArray:self.app.scheduledLocalNotifications];
     [self.app cancelAllLocalNotifications];
     [self rescheduleAllLocalNotifications];
-    [self.stackedNotificationsSet removeAllObjects];
-
-    self.needsRescheduling = NO;
+    [self.proxyStackedNotificationsSet removeAllObjects];
     
     self.startRescheduleDate = nil;
 }
@@ -136,8 +163,7 @@
         [self.app presentLocalNotificationNow:notification];
     }
     else if ([self shouldStackNotification]) {
-        self.needsRescheduling = YES;
-        [self.stackedNotificationsSet addObject:notification];
+        [self.proxyStackedNotificationsSet addObject:notification];
     }
     else if ([self allowsToScheduleNotificationOn:notification.fireDate]) {
         [self.app scheduleLocalNotification:notification];
