@@ -82,7 +82,7 @@
 
 - (void)dealloc
 {
-    [self removeObserver:self  forKeyPath:@"stackedNotificationsSet"];
+    [self removeObserver:self forKeyPath:@"stackedNotificationsSet"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -158,14 +158,10 @@
 {
     if (! self.needsRescheduling) return;
     
-    self.startRescheduleDate = [NSDate date];
-    
     [self.proxyStackedNotificationsSet addObjectsFromArray:self.app.scheduledLocalNotifications];
     [self.app cancelAllLocalNotifications];
     [self rescheduleAllLocalNotifications];
     [self.proxyStackedNotificationsSet removeAllObjects];
-    
-    self.startRescheduleDate = nil;
 }
 
 #pragma mark - Privates
@@ -175,16 +171,20 @@
     if (! notification.fireDate) {
         [self.app presentLocalNotificationNow:notification];
     }
-    else if ([self shouldStackNotification]) {
-        [self.proxyStackedNotificationsSet addObject:notification];
-    }
     else if ([self allowsToScheduleNotificationOn:notification.fireDate]) {
-        [self.app scheduleLocalNotification:notification];
+        if ([self shouldStackNotification]) {
+            [self.proxyStackedNotificationsSet addObject:notification];
+        }
+        else {
+            [self.app scheduleLocalNotification:notification];
+        }
     }
 }
 
 - (void)rescheduleAllLocalNotifications
 {
+    self.startRescheduleDate = [NSDate date];
+
     for (UILocalNotification *notification in self.stackedNotificationsSet) {
         if (! notification.fireDate) {
             [self.app presentLocalNotificationNow:notification];
@@ -193,6 +193,8 @@
             [self.app scheduleLocalNotification:notification];
         }
     }
+    
+    self.startRescheduleDate = nil;
 }
 
 - (UILocalNotification *)mergeAndScheduleLocalNotificationWithProperties:(NSDictionary *)properties options:(NSDictionary *)otherProperties

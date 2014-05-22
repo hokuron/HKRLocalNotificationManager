@@ -171,6 +171,15 @@
     XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is past, notification should NOT be scheduled");
 }
 
+- (void)testScheduleNotificationOnBodyUserInfoOptions_stack_pastNotification
+{
+    [_manager scheduleNotificationOn:self.fireDate body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)1, @"");
+    
+    [_manager scheduleNotificationOn:[NSDate date] body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertEqual([[_manager stackedLocalNotifications] count], (NSUInteger)0, @"past notification should not stack");
+}
+
 #pragma mark - testScheduleNotificationWithActionOnDateBodyUserInfoOptions
 
 - (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_noOptions
@@ -235,6 +244,15 @@
     UILocalNotification *result = [_manager scheduleNotificationWithAction:self.alertAction onDate:[NSDate date] body:self.alertBody userInfo:self.userInfo options:nil];
     XCTAssertNotNil(result, @"");
     XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)0, @"if fireDate is past, notification should NOT be scheduled");
+}
+
+- (void)testScheduleNotificationWithActionOnDateBodyUserInfoOptions_stack_pastNotification
+{
+    [_manager scheduleNotificationWithAction:self.alertAction onDate:self.fireDate body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertEqual([[UIApplication sharedApplication].scheduledLocalNotifications count], (NSUInteger)1, @"");
+    
+    [_manager scheduleNotificationWithAction:self.alertAction onDate:[NSDate date] body:self.alertBody userInfo:self.userInfo options:nil];
+    XCTAssertEqual([[_manager stackedLocalNotifications] count], (NSUInteger)0, @"past notification should not stack");
 }
 
 #pragma mark - presentNotificationNowWithBodyUserInfoOptions
