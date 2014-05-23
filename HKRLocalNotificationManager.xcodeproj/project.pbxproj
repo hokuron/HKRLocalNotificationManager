@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA07065D192F01CC00ECE64F /* NotificationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA07065C192F01CC00ECE64F /* NotificationListViewController.m */; };
 		AA52E75019122C2100C0FDFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E74F19122C2100C0FDFA /* Foundation.framework */; };
 		AA52E75219122C2100C0FDFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E75119122C2100C0FDFA /* CoreGraphics.framework */; };
 		AA52E75419122C2100C0FDFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E75319122C2100C0FDFA /* UIKit.framework */; };
 		AA52E75A19122C2100C0FDFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA52E75819122C2100C0FDFA /* InfoPlist.strings */; };
 		AA52E75C19122C2100C0FDFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E75B19122C2100C0FDFA /* main.m */; };
 		AA52E76019122C2100C0FDFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E75F19122C2100C0FDFA /* AppDelegate.m */; };
-		AA52E76319122C2100C0FDFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA52E76119122C2100C0FDFA /* Main.storyboard */; };
 		AA52E76619122C2100C0FDFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E76519122C2100C0FDFA /* ViewController.m */; };
 		AA52E76819122C2100C0FDFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA52E76719122C2100C0FDFA /* Images.xcassets */; };
 		AA52E76F19122C2100C0FDFA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA52E76E19122C2100C0FDFA /* XCTest.framework */; };
@@ -25,6 +25,7 @@
 		AA52E78C1912374300C0FDFA /* HKRLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA52E78A1912304100C0FDFA /* HKRLocalNotificationManager.m */; };
 		AA6B637B19208313007538CC /* HKRLocalNotificationPropertyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B637A19208313007538CC /* HKRLocalNotificationPropertyBuilder.m */; };
 		AA6B637D19208484007538CC /* HKRLocalNotificationPropertyBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6B637C19208483007538CC /* HKRLocalNotificationPropertyBuilderTest.m */; };
+		AA8501A1192F094D0055BBCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA07065F192F06D700ECE64F /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA07065B192F01CC00ECE64F /* NotificationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationListViewController.h; sourceTree = "<group>"; };
+		AA07065C192F01CC00ECE64F /* NotificationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationListViewController.m; sourceTree = "<group>"; };
+		AA070660192F06D700ECE64F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA52E74C19122C2100C0FDFA /* HKRLocalNotificationManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HKRLocalNotificationManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA52E74F19122C2100C0FDFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA52E75119122C2100C0FDFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,7 +52,6 @@
 		AA52E75D19122C2100C0FDFA /* HKRLocalNotificationManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HKRLocalNotificationManager-Prefix.pch"; sourceTree = "<group>"; };
 		AA52E75E19122C2100C0FDFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Example/AppDelegate.h; sourceTree = "<group>"; };
 		AA52E75F19122C2100C0FDFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../Example/AppDelegate.m; sourceTree = "<group>"; };
-		AA52E76219122C2100C0FDFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA52E76419122C2100C0FDFA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../Example/ViewController.h; sourceTree = "<group>"; };
 		AA52E76519122C2100C0FDFA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../Example/ViewController.m; sourceTree = "<group>"; };
 		AA52E76719122C2100C0FDFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Example/Images.xcassets; sourceTree = "<group>"; };
@@ -122,11 +125,13 @@
 		AA52E75519122C2100C0FDFA /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				AA07065F192F06D700ECE64F /* Main.storyboard */,
 				AA52E75E19122C2100C0FDFA /* AppDelegate.h */,
 				AA52E75F19122C2100C0FDFA /* AppDelegate.m */,
-				AA52E76119122C2100C0FDFA /* Main.storyboard */,
 				AA52E76419122C2100C0FDFA /* ViewController.h */,
 				AA52E76519122C2100C0FDFA /* ViewController.m */,
+				AA07065B192F01CC00ECE64F /* NotificationListViewController.h */,
+				AA07065C192F01CC00ECE64F /* NotificationListViewController.m */,
 				AA52E76719122C2100C0FDFA /* Images.xcassets */,
 				AA52E75619122C2100C0FDFA /* Supporting Files */,
 			);
@@ -252,7 +257,7 @@
 			files = (
 				AA52E76819122C2100C0FDFA /* Images.xcassets in Resources */,
 				AA52E75A19122C2100C0FDFA /* InfoPlist.strings in Resources */,
-				AA52E76319122C2100C0FDFA /* Main.storyboard in Resources */,
+				AA8501A1192F094D0055BBCA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA07065D192F01CC00ECE64F /* NotificationListViewController.m in Sources */,
 				AA52E76619122C2100C0FDFA /* ViewController.m in Sources */,
 				AA52E76019122C2100C0FDFA /* AppDelegate.m in Sources */,
 				AA52E78B1912304100C0FDFA /* HKRLocalNotificationManager.m in Sources */,
@@ -300,21 +306,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AA07065F192F06D700ECE64F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA070660192F06D700ECE64F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		AA52E75819122C2100C0FDFA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AA52E75919122C2100C0FDFA /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		AA52E76119122C2100C0FDFA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA52E76219122C2100C0FDFA /* Base */,
-			);
-			name = Main.storyboard;
-			path = ../Example;
 			sourceTree = "<group>";
 		};
 		AA52E77719122C2100C0FDFA /* InfoPlist.strings */ = {
