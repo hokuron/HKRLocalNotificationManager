@@ -83,7 +83,7 @@ You can specify the soundName used in local notification of all. you can also ov
 // soundName of the following local notification is applied nil.
 [[HKRLocalNotificationManager sharedManager] presentNotificationNowWithBody:@"alert body"
                                                                    userInfo:nil
-                                                                    options:@{@"soundName": nil}];
+                                                                    options:@{@"soundName": [NSNull null]}];
 ```
 
 ### Automatic re-schedule (processing in background)
