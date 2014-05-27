@@ -41,7 +41,7 @@ And immediate…
                                                                     options:nil];
 ```
 
-### Scheduling a local notification without action
+### Scheduling a local notification with action
 
 ```objectivec
 [[HKRLocalNotificationManager sharedManager] scheduleNotificationWithAction:@"action title"
@@ -72,7 +72,7 @@ Example sets the value of `applicationIconBadgeNumber` using the `options`.
                                                                     options:@{@"applicationIconBadgeNumber": @10}];
 ```
 
-### Canceling a local notification in system or Stacked
+### Canceling a local notification in system or stacked
 
 If you want to cancel a local notification that you scheduled using the methods above, please do use the following methods always.  
 
