@@ -55,9 +55,9 @@ And immediate...
 
 ```objectivec
 [[HKRLocalNotificationManager sharedManager] presentNotificationNowWithAction:@"action title"
-                                                                       body:@"alert body"
-                                                                   userInfo:nil
-                                                                    options:nil];
+                                                                         body:@"alert body"
+                                                                     userInfo:nil
+                                                                      options:nil];
 ```
 
 ### What is `options` in arguments?
