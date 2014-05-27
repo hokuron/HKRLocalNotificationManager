@@ -8,6 +8,20 @@ HKRLocalNotificationManager is a safe schedule manager of local notification.
 * Useful methods to schedule.
 * When `UILocalNotification` is stocked once, and application moved to a background, it is done a schedule all at once.
 
+## Installing
+
+### CocoaPods
+
+Add the following to your `Podfile`.
+
+```
+pod 'HKRLocalNotificationManager'
+```
+
+### Manual
+
+Add `HKRLocalNotificationManager/HKRLocalNotificationManager.{h,m}` to your project.
+
 ## Usage
 
 ### Scheduling a local notification without action
